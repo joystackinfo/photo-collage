@@ -1,0 +1,48 @@
+.landing-page {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-lg);
+  min-height: 100svh;
+  background: radial-gradient(circle at top, #fff 0, var(--bg-soft-cream) 62%);
+}
+
+.landing-container {
+  text-align: center;
+  width: min(100%, 480px);
+}
+
+.landing-header {
+  margin-bottom: var(--spacing-xl);
+}
+
+.emoji {
+  font-size: 64px;
+  margin-bottom: var(--spacing-md);
+}
+
+.tagline {
+  color: var(--text-light);
+  font-size: var(--font-size-lg);
+  font-weight: 400;
+}
+
+.landing-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+.landing-buttons .btn {
+  width: 100%;
+  padding: var(--spacing-lg);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+}
+
+.landing-footer {
+  color: var(--text-light);
+  font-size: var(--font-size-sm);
+}

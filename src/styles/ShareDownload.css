@@ -1,0 +1,114 @@
+.share-download {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  background-color: var(--surface);
+}
+
+.share-container {
+  flex: 1;
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-lg);
+}
+
+.share-success {
+  width: 100%;
+  max-width: 400px;
+  padding: var(--spacing-lg);
+  background-color: #f0f8f6;
+  border: 2px solid #4da6a6;
+  border-radius: var(--radius-lg);
+  text-align: center;
+}
+
+.share-success h3 {
+  color: #2d5f6e;
+  margin-bottom: var(--spacing-md);
+}
+
+.share-success p {
+  color: var(--text-light);
+  margin-bottom: var(--spacing-md);
+}
+
+.share-link-box {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
+.share-link-input {
+  padding: var(--spacing-md);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  font-family: monospace;
+  font-size: var(--font-size-sm);
+  word-break: break-all;
+  background-color: var(--surface);
+}
+
+.share-link-box .btn {
+  width: 100%;
+}
+
+.share-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  text-align: left;
+  padding: var(--spacing-md);
+  background-color: var(--surface);
+  border-radius: var(--radius-md);
+}
+
+.share-info p {
+  font-size: var(--font-size-sm);
+  color: var(--text-light);
+  margin: 0;
+}
+
+.share-actions {
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.share-actions .btn {
+  width: 100%;
+  padding: var(--spacing-lg);
+  font-size: var(--font-size-lg);
+}
+
+.or-text {
+  color: var(--text-light);
+  font-size: var(--font-size-sm);
+  margin: var(--spacing-md) 0;
+  text-align: center;
+}
+
+.loading-text {
+  color: var(--text-light);
+  font-size: var(--font-size-base);
+  text-align: center;
+}
+
+.share-footer {
+  padding: var(--spacing-lg);
+  border-top: 1px solid var(--border-light);
+  background-color: white;
+  width: 100%;
+}
+
+.share-footer .btn-full {
+  width: min(100%, 420px);
+  display: flex;
+  margin-inline: auto;
+}
