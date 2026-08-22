@@ -97,6 +97,10 @@
   justify-content: center;
 }
 
+.remove-btn:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
 .btn-continue {
   width: min(100% - 32px, 420px);
   align-self: center;

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { ArrowLeft, ArrowRight, Edit3 } from 'lucide-react';
 import type { Photo, Layout, Mode } from '../types/index';
 import type { Theme } from '../data/themes';
 import { applyImageAdjustments } from '../utils/imageProcessor';
@@ -92,8 +93,39 @@ export default function CanvasPreview({
       roundRect(ctx, x + 2, y + 2, width - 4, height - 4, theme.cornerRadius);
       ctx.clip();
 
-      // Draw image (fills the clipped area)
-      ctx.drawImage(img, x + 2, y + 2, width - 4, height - 4);
+      // Match the editor crop by scaling and offsetting the source image.
+      const drawWidth = width - 4;
+      const drawHeight = height - 4;
+      const cropZoom = photo.cropZoom ?? 1;
+      const sourceAspect = img.width / img.height;
+      const targetAspect = drawWidth / drawHeight;
+      let sourceWidth = img.width;
+      let sourceHeight = img.height;
+
+      if (sourceAspect > targetAspect) {
+        sourceWidth = img.height * targetAspect;
+      } else {
+        sourceHeight = img.width / targetAspect;
+      }
+
+      sourceWidth /= cropZoom;
+      sourceHeight /= cropZoom;
+      const maxSourceX = img.width - sourceWidth;
+      const maxSourceY = img.height - sourceHeight;
+      const sourceX = maxSourceX * (0.5 + (photo.cropX ?? 0) / 100);
+      const sourceY = maxSourceY * (0.5 + (photo.cropY ?? 0) / 100);
+
+      ctx.drawImage(
+        img,
+        sourceX,
+        sourceY,
+        sourceWidth,
+        sourceHeight,
+        x + 2,
+        y + 2,
+        drawWidth,
+        drawHeight
+      );
 
       // Apply brightness/saturation adjustments to this region
       applyImageAdjustments(
@@ -184,7 +216,7 @@ export default function CanvasPreview({
   return (
     <div className="canvas-preview">
       <div className="preview-header">
-        <button className="btn-back" onClick={onBack}>← Back</button>
+        <button className="btn-back" onClick={onBack} aria-label="Go back"><ArrowLeft size={18} aria-hidden="true" /> Back</button>
         <h2>Preview</h2>
         <div className="spacer"></div>
       </div>
@@ -201,7 +233,7 @@ export default function CanvasPreview({
             className="btn btn-secondary"
             onClick={onEditPhoto}
           >
-            ✏️ Edit Photo
+            <Edit3 size={18} aria-hidden="true" /> Edit Photo
           </button>
         </div>
       </div>
@@ -211,7 +243,7 @@ export default function CanvasPreview({
           className="btn btn-primary btn-full"
           onClick={onNext}
         >
-          Share or Download →
+          Share or Download <ArrowRight size={18} aria-hidden="true" />
         </button>
       </div>
     </div>

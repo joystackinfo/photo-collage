@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import type { Photo, Mode, Layout } from './types/index';
 import { themes, getTheme } from './data/themes';
 import { getDefaultLayout, getLayoutsForPhotoCount } from './utils/layoutCalculator';
@@ -12,6 +13,7 @@ import PhotoEditor from './pages/PhotoEditor';
 import LayoutSelector from './pages/LayoutSelector';
 import CanvasPreview from './pages/CanvasPreview';
 import ShareDownload from './pages/ShareDownload';
+import SharedView from './pages/SharedView';
 import './App.css';
 
 type AppStep = 
@@ -24,7 +26,7 @@ type AppStep =
   | 'preview' 
   | 'share';
 
-function App() {
+function CollageFlow() {
   // Current step in the flow
   const [currentStep, setCurrentStep] = useState<AppStep>('landing');
 
@@ -101,6 +103,18 @@ function App() {
       ...updatedPhotos[currentPhotoIndex],
       brightness,
       saturation,
+      edited: true,
+    };
+    setPhotos(updatedPhotos);
+  };
+
+  const handlePhotoCrop = (cropZoom: number, cropX: number, cropY: number) => {
+    const updatedPhotos = [...photos];
+    updatedPhotos[currentPhotoIndex] = {
+      ...updatedPhotos[currentPhotoIndex],
+      cropZoom,
+      cropX,
+      cropY,
       edited: true,
     };
     setPhotos(updatedPhotos);
@@ -187,6 +201,7 @@ function App() {
           photoIndex={currentPhotoIndex}
           totalPhotos={photos.length}
           onAdjustment={handlePhotoAdjustment}
+          onCrop={handlePhotoCrop}
           onNext={handleEditorNext}
           onBack={handleGoBack}
         />
@@ -227,5 +242,15 @@ function App() {
     </div>
   );
 }
+
+function App() {
+  return (
+    <Routes>
+      {/* The whole "create a collage" flow lives at the home route */}
+      <Route path="/" element={<CollageFlow />} />
+
+      {/* Someone opening a shared link lands here instead */}
+      <Route path="/share/:id" element={<SharedView />} />
+    </Routes>
 
 export default App;

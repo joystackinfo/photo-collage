@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { ArrowLeft, ArrowRight, Camera, CameraOff, Check, FolderOpen, Plus, Trash2 } from 'lucide-react';
 import type { Photo } from '../types/index';
 import '../styles/CameraUpload.css';
 
@@ -21,6 +22,7 @@ export default function CameraUpload({
   const [videoReady, setVideoReady] = useState(false);
   const [capturedPhotos, setCapturedPhotos] = useState<Photo[]>([]);
   const [cameraError, setCameraError] = useState<string | null>(null);
+  const [captureMessage, setCaptureMessage] = useState<string | null>(null);
 
   useEffect(() => {
     if (!cameraStream || !videoRef.current) return;
@@ -104,6 +106,8 @@ export default function CameraUpload({
 
       setCapturedPhotos((currentPhotos) => [...currentPhotos, photo]);
       setCameraError(null);
+      setCaptureMessage('Photo captured');
+      window.setTimeout(() => setCaptureMessage(null), 2000);
     }, 'image/jpeg', 0.9);
   };
 
@@ -159,7 +163,7 @@ export default function CameraUpload({
   return (
     <div className="camera-upload">
       <div className="camera-header">
-        <button className="btn-back" onClick={onBack}>← Back</button>
+        <button className="btn-back" onClick={onBack} aria-label="Go back"><ArrowLeft size={18} aria-hidden="true" /> Back</button>
         <h2>Add Photos</h2>
         <div className="spacer"></div>
       </div>
@@ -171,14 +175,14 @@ export default function CameraUpload({
             className="btn btn-primary btn-large"
             onClick={startCamera}
           >
-            📷 Start Camera
+            <Camera size={22} aria-hidden="true" /> Start Camera
           </button>
           <p className="or-text">or</p>
           <button 
             className="btn btn-secondary btn-large"
             onClick={() => fileInputRef.current?.click()}
           >
-            📁 Choose from Gallery
+            <FolderOpen size={22} aria-hidden="true" /> Choose Photos
           </button>
           <input 
             ref={fileInputRef}
@@ -206,13 +210,13 @@ export default function CameraUpload({
             onClick={capturePhoto}
             disabled={!videoReady}
           >
-            {videoReady ? '📸 Capture' : '⌛ Camera loading...'}
+            {videoReady ? <><Camera size={22} aria-hidden="true" /> Capture</> : 'Camera loading...'}
           </button>
           <button 
             className="btn btn-secondary"
             onClick={stopCamera}
           >
-            Stop Camera
+            <CameraOff size={18} aria-hidden="true" /> Stop Camera
           </button>
         </div>
       )}
@@ -230,11 +234,14 @@ export default function CameraUpload({
                 <img src={photo.dataUrl} alt={`Photo ${index + 1}`} />
                 <button
                   className="remove-btn"
+                  type="button"
+                  title="Remove photo"
+                  aria-label={`Remove photo ${index + 1}`}
                   onClick={() => {
                     setCapturedPhotos(capturedPhotos.filter((_, i) => i !== index));
                   }}
                 >
-                  ✕
+                  <Trash2 size={17} aria-hidden="true" />
                 </button>
               </div>
             ))}
@@ -245,7 +252,7 @@ export default function CameraUpload({
               className="btn btn-secondary"
               onClick={() => setIsCameraActive(false)}
             >
-              + Add More
+              <Plus size={18} aria-hidden="true" /> Add More
             </button>
           )}
         </div>
@@ -257,8 +264,11 @@ export default function CameraUpload({
           className="btn btn-primary btn-continue"
           onClick={handleContinue}
         >
-          Continue →
+          Continue <ArrowRight size={18} aria-hidden="true" />
         </button>
+      )}
+      {captureMessage && (
+        <p className="action-feedback" role="status"><Check size={16} aria-hidden="true" /> {captureMessage}</p>
       )}
     </div>
   );

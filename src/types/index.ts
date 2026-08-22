@@ -5,6 +5,9 @@ export interface Photo {
   dataUrl: string; // base64 string for preview (shows in UI)
   brightness: number; // 0-100, default 50
   saturation: number; // 0-100, default 50
+  cropZoom?: number; // 1-2, default 1
+  cropX?: number; // -50 to 50, default 0
+  cropY?: number; // -50 to 50, default 0
   edited: boolean; // whether user adjusted it
 }
 

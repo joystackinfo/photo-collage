@@ -123,13 +123,14 @@ input:focus-visible {
 
 /* Secondary button */
 .btn-secondary {
-  background-color: var(--secondary);
-  color: var(--text-dark);
-  border: 1px solid var(--border-light);
+  background-color: transparent;
+  color: var(--primary-dark);
+  border: 1px solid var(--primary);
 }
 
 .btn-secondary:hover {
   background-color: var(--surface-muted);
+  border-color: var(--primary-dark);
 }
 
 /* Large button */
@@ -157,6 +158,27 @@ input:focus-visible {
 
 .btn-back:hover {
   opacity: 0.7;
+}
+
+.action-feedback {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.action-feedback {
+  justify-content: center;
+  color: var(--primary-dark);
+  font-size: var(--font-size-sm);
+  margin: var(--spacing-sm) auto;
+}
+
+.spin {
+  animation: spin 900ms linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 /* ==================== */
