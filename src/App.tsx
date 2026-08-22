@@ -252,5 +252,7 @@ function App() {
       {/* Someone opening a shared link lands here instead */}
       <Route path="/share/:id" element={<SharedView />} />
     </Routes>
+  );
+}
 
 export default App;
