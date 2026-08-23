@@ -1,75 +1,57 @@
-# React + TypeScript + Vite
+# Photo Collage
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Take photos, pick a vibe, share with friends. No signup needed.
 
-Currently, two official plugins are available:
+**[Live Demo →](photocollage-glzou126w-joystackinfos-projects.vercel.app)**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## What it does
 
-## React Compiler
+Take or upload photos, arrange them into a single frame or a collage, pick from 5 aesthetic themes, adjust brightness/saturation, and either download the result or get a shareable link.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Themes
 
-## Expanding the ESLint configuration
+-  **Cottagecore** — warm tones, botanical vines and flowers
+-  **90s** — cool blues, pixels, CDs, retro icons
+-  **Analog** — black and white film strip look
+-  **Coastal** — seafoam, shells, starfish
+-  **Botanical** — soft greens, monstera leaves, jungle vibes
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Features
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- 📷 Camera capture or file upload (works on mobile and desktop)
+-  Single frame or multi-photo collage (up to 6 photos)
+-  5 custom aesthetic themes with hand-designed stickers
+-  Brightness and saturation adjustment per photo
+-  Multiple layout options depending on photo count
+- Download locally
+- 🔗 Shareable links (stored via Supabase, no expiration)
+-  Mobile-first, fully responsive
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Tech Stack
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **Frontend:** React + TypeScript + Vite
+- **Rendering:** Canvas API
+- **Backend:** Supabase (PostgreSQL + Storage)
+- **Routing:** React Router
+- **Hosting:** Vercel
 
+## Running locally
+
+```bash
+git clone https://github.com/joystackinfo/photo-collage.git
+cd photo-collage
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Create a `.env.local` file:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Then:
 
+```bash
+npm run dev
 ```
