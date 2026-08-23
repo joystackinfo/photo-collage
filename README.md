@@ -2,7 +2,7 @@
 
 Take photos, pick a vibe, share with friends. No signup needed.
 
-**[Live Demo →](photocollage-glzou126w-joystackinfos-projects.vercel.app)**
+**Live Demo → (photocollage-glzou126w-joystackinfos-projects.vercel.app)**
 
 ## What it does
 
